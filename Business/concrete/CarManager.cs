@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Core.Entities;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using System;
@@ -29,7 +30,10 @@ namespace Business.concrete
             }
         }
 
-      
+        public void Deleted(Car car)
+        {
+            _carDal.Delete(car);
+        }
 
         public List<Car> GetAll()
         {
@@ -46,5 +50,17 @@ namespace Business.concrete
             return _carDal.GetAll(c => c.ColorId == id);
 
         }
+
+        public List<CarDetailDto> GetCarDetails()
+        {
+            return _carDal.GetCarDetails();
+        }
+
+        public void Update(Car car)
+        {
+            _carDal.Update(car);
+        }
+
+        
     }
 }
