@@ -13,13 +13,15 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            //CarTest();
+
+
+            CarTest();
             CarManager carManager = new CarManager(new EfCarDal());
             ColorManager colorManager = new ColorManager(new EfColorDal());
             BrandManager brandManager = new BrandManager(new EfBrandDal());
 
             Console.WriteLine("List:");
-            foreach (Car car in carManager.GetAll())
+            foreach (Car car in carManager.GetAll().Data)
             {
                 Console.WriteLine("Car Id: {0} --- Brand Id: {1} --- Color Id: " +
                     "{2} --- Daily Price: {3} --- Description: {4}", car.Id, car.BrandId,
@@ -39,7 +41,7 @@ namespace ConsoleUI
 
         private static void GetBtId(CarManager carManager, BrandManager brandManager)
         {
-            foreach (var item in carManager.GetCarsByBrandId(2))
+            foreach (var item in carManager.GetCarsByBrandId(2).Data)
             {
                 Console.WriteLine(item.Descriptions);
             }
@@ -49,7 +51,7 @@ namespace ConsoleUI
 
         private static void BrandGetAll(BrandManager brandManager)
         {
-            foreach (var brand in brandManager.GetAll())
+            foreach (var brand in brandManager.GetAll().Data)
             {
 
                 Console.WriteLine("Brand Id: {0} --- Brand Name: {1}"
@@ -59,7 +61,7 @@ namespace ConsoleUI
 
         private static void ColorGetAll(ColorManager colorManager)
         {
-            foreach (var color in colorManager.GetAll())
+            foreach (var color in colorManager.GetAll().Data)
             {
 
                 Console.WriteLine("Color Id: {0} --- Color Name: {1}"
@@ -80,7 +82,7 @@ namespace ConsoleUI
         private static void DetailTest(CarManager carManager)
         {
             Console.WriteLine("Details:");
-            List<CarDetailDto> carDetailDtos = carManager.GetCarDetails();
+            List<CarDetailDto> carDetailDtos = carManager.GetCarDetails().Data;
 
             foreach (CarDetailDto carDetailDto in carDetailDtos)
             {
@@ -94,13 +96,13 @@ namespace ConsoleUI
         private static void CarTest()
         {
             CarManager carManager = new CarManager(new EfCarDal());
-            foreach (var car in carManager.GetAll())
+            foreach (var car in carManager.GetAll().Data)
             {
 
                 Console.WriteLine(car.DailyPrice);
                 Console.WriteLine(car.ModelYear);
             }
-            
+
         }
     }
-}
+        }
